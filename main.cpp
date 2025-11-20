@@ -1,6 +1,5 @@
 ﻿// Lock-free HFT backtester with Monte Carlo VaR simulation
 // Author: Azita Dadresan | CQF, Fidelity anomaly detection background
-// Implements Itô's Lemma: dS = μS dt + σS dW for GBM price paths
 
 #include <iostream>
 #include <vector>
@@ -84,7 +83,7 @@ int main() {
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
     
     std::cout << "Execution Time: " << duration.count() / 1e6 << " seconds\n";
-    std::cout << "Latency per path: " << duration.count() / 1e6 << " µs\n";
+    std::cout << "Latency per path: " << duration.count() / (NUM_THREADS * PATHS_PER_THREAD) << " microseconds\n";
     
     compute_risk_metrics(pnl_results);
     
